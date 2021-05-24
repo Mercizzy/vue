@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue</title>
+    <script src="../../dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+    </div>
+    <script type="module">
+        import MyTest from './component/1.js'
+        const vm = new Vue({
+            el: '#app',
+            template: '<MyTest></MyTest>',
+            components: {
+                MyTest
+            },
+            data() {
+                return {
+                    msg: 'hello'
+                }
+            },
+            beforeCreate() {
+                console.log('parent-beforeCreate');
+            },
+            created() {
+                console.log('parent-created');
+            },
+            beforeMount() {
+                console.log('parent-beforeMount');
+            },
+            mounted() {
+                console.log('parent-mounted');
+            },
+        })
+        console.log(vm);
+    </script>
+  </body>
+</html>

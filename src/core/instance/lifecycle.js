@@ -137,7 +137,13 @@ export function lifecycleMixin (Vue: Class<Component>) {
     }
   }
 }
-
+/**
+ * 1. 判断有没有render函数，如果没有render但是存在template，说明使用的是不包含编译器版本低的vue
+ * 2. 执行beforeMounted钩子
+ * 3. 声明updateComponent方法
+ * 4. new Watcher，在Watcher中，执行了updateComponent
+ * 5. vm._isMounted = true，执行mounted钩子
+ */
 export function mountComponent (
   vm: Component,
   el: ?Element,

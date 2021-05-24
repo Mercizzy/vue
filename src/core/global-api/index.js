@@ -50,7 +50,12 @@ export function initGlobalAPI (Vue: GlobalAPI) {
     observe(obj)
     return obj
   }
-
+  // </T>
+  
+  /**
+   * 初始化Vue.options
+   * 初始化Vue.options.components,Vue.options.directives,Vue.options.filters
+   */
   Vue.options = Object.create(null)
   ASSET_TYPES.forEach(type => {
     Vue.options[type + 's'] = Object.create(null)
@@ -60,10 +65,15 @@ export function initGlobalAPI (Vue: GlobalAPI) {
   // components with in Weex's multi-instance scenarios.
   Vue.options._base = Vue
 
+  // 注册keepAlive
   extend(Vue.options.components, builtInComponents)
 
+  // Vue.use
   initUse(Vue)
+  // Vue.mixin
   initMixin(Vue)
+  // Vue.extend
   initExtend(Vue)
+  // Vue.component,Vue.directive,Vue.filter
   initAssetRegisters(Vue)
 }
