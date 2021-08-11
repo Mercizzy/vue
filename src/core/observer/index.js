@@ -44,6 +44,7 @@ export class Observer {
     this.dep = new Dep()
     this.vmCount = 0
     def(value, '__ob__', this)
+    // 如果是数组，则重写一些改变原数组的方法，如push、pop、splice等
     if (Array.isArray(value)) {
       if (hasProto) {
         protoAugment(value, arrayMethods)

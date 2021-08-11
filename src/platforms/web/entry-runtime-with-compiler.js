@@ -14,6 +14,11 @@ const idToTemplate = cached(id => {
   return el && el.innerHTML
 })
 
+/**
+ * 1. 缓存原来的$mount方法
+ * 2. 重写$mount方法
+ * 3. 最后执行原来的$mount方法
+ */
 const mount = Vue.prototype.$mount
 Vue.prototype.$mount = function (
   el?: string | Element,
@@ -22,6 +27,7 @@ Vue.prototype.$mount = function (
   el = el && query(el)
 
   /* istanbul ignore if */
+  // Vue实例不能挂载在body或者html上
   if (el === document.body || el === document.documentElement) {
     process.env.NODE_ENV !== 'production' && warn(
       `Do not mount Vue to <html> or <body> - mount to normal elements instead.`
@@ -31,6 +37,8 @@ Vue.prototype.$mount = function (
 
   const options = this.$options
   // resolve template/el and convert to render function
+  // 如果没有render，那么会将template转化为render
+  // 所以如果render和template同时存在，则render优先级高
   if (!options.render) {
     let template = options.template
     if (template) {

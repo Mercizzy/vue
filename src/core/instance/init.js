@@ -49,12 +49,18 @@ export function initMixin (Vue: Class<Component>) {
     }
     // expose real self
     vm._self = vm
+    // 初始化$parent、$root、$children、$refs、_watcher、_inactive、_directInactive、_isMounted、_isDestroyed、_isBeingDestroyed
     initLifecycle(vm)
+    // _events、updateComponentListeners
     initEvents(vm)
+    // _vnode、_staticTrees、$slots、$scopedSlots、_c、$createElement、$attrs、$listeners
     initRender(vm)
     callHook(vm, 'beforeCreate')
+    // 初始化注入
     initInjections(vm) // resolve injections before data/props
+    // 初始化props、methods、data、computed、watch
     initState(vm)
+    // 初始化provide
     initProvide(vm) // resolve provide after data/props
     callHook(vm, 'created')
 

@@ -3,6 +3,9 @@ import { initGlobalAPI } from './global-api/index'
 import { isServerRendering } from 'core/util/env'
 import { FunctionalRenderContext } from 'core/vdom/create-functional-component'
 
+// 初始化Vue上的一些方法
+// Vue.extend Vue.mixin Vue.use
+// Vue.component Vue.directive Vue.filter
 initGlobalAPI(Vue)
 
 Object.defineProperty(Vue.prototype, '$isServer', {

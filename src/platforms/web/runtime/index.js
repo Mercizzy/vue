@@ -27,13 +27,17 @@ Vue.config.getTagNamespace = getTagNamespace
 Vue.config.isUnknownElement = isUnknownElement
 
 // install platform runtime directives & components
+// v-model v-show指令
 extend(Vue.options.directives, platformDirectives)
+// transition transition-group组件
 extend(Vue.options.components, platformComponents)
 
 // install platform patch function
+// 在Vue的原型上挂在__patch__方法
 Vue.prototype.__patch__ = inBrowser ? patch : noop
 
 // public mount method
+// 声明$mount方法
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
